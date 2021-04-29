@@ -1,10 +1,3 @@
-// Size of the DIV is containers width or height / n (n is number entered) - 30 for borders
-// Whem soneone enters E.G: 4 we want to make 4 * 4 boxes 
-// Make a function for drawing on pad, and that function takes parameter for Color and we will
-// set default color to black and then when we change color we will call that function with
-// input:color value as parameter.
-//Maybe ADD A BUTTON FOR HIDING TOOL BAR and write Toolbar in h3 in tools section
-
 //DOM / Variables
 const drawPad = document.getElementById('drawPad');
 const pickColor = document.getElementById('pickColor');
@@ -31,6 +24,7 @@ function populatePad(size = 4) {
         const pixel = document.createElement('div');
         pixel.style.width = `${drawPadSize / size}px`;
         pixel.style.height = `${drawPadSize / size}px`;
+        pixel.setAttribute('draggable', false);
         drawPad.appendChild(pixel);
     }
     setBgColor();
@@ -44,33 +38,8 @@ function setBgColor(color = '#FFF') {
     })
 }
 
-function getRandomColor() {
-    drawingColor =  `hsl(${Math.floor(Math.random() * 360)}, 100%, 50%)`;
-}
-
-//EventListeners
-window.addEventListener('DOMContentLoaded', init);
-
-pickColor.addEventListener('input', (e) => {
-    drawingColor = e.target.value;
-})
-changeBGColor.addEventListener('input', (e) => {
-    setBgColor(e.target.value);
-})
-clearPadBtn.addEventListener('click', () => {
-    setBgColor('#FFF');
-})
-changeSize.addEventListener('change', (e) => {
-    populatePad(e.target.value);
-})
-randomColorBtn.addEventListener('click', () => {
-    rainbow = !rainbow;
-    randomColorBtn.classList.toggle('active');
-})
-eraserBtn.addEventListener('click', () => drawingColor = '#FFF');
-
-drawPad.addEventListener('mouseover', (e) => {
-    if(e.target.parentNode === drawPad) {
+function startDrawing(e) {
+    if(e.target.parentNode === drawPad && mouseDown) {
         const pixel = e.target;
         pixel.style.backgroundColor = drawingColor;
 
@@ -78,4 +47,42 @@ drawPad.addEventListener('mouseover', (e) => {
             getRandomColor();
         } 
     }
+}
+
+function getRandomColor() {
+    drawingColor =  `hsl(${Math.floor(Math.random() * 360)}, 100%, 50%)`;
+}
+
+//EventListeners
+window.addEventListener('DOMContentLoaded', init);
+
+pickColor.addEventListener('input', (e) => drawingColor = e.target.value)
+
+changeBGColor.addEventListener('input', (e) => setBgColor(e.target.value))
+
+clearPadBtn.addEventListener('click', () => setBgColor('#FFF'))
+
+changeSize.addEventListener('change', (e) => populatePad(e.target.value))
+
+changeSize.addEventListener('input', (e) => {
+    sizeEl.textContent = `Size: ${e.target.value} x ${e.target.value}`;
 })
+
+randomColorBtn.addEventListener('click', () => {
+    rainbow = !rainbow;
+    randomColorBtn.classList.toggle('active');
+})
+
+eraserBtn.addEventListener('click', () => drawingColor = changeBGColor.value);
+
+drawPad.addEventListener('mousedown', (e) => {
+    mouseDown = true;
+    startDrawing(e);
+})
+
+drawPad.addEventListener('mousemove', (e) => {
+    startDrawing(e);
+})
+
+drawPad.addEventListener('mouseup', () => mouseDown = false);
+drawPad.addEventListener('mouseleave', () => mouseDown = false);

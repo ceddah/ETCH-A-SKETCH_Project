@@ -41,9 +41,10 @@ h1 {
 #drawPad > div {
     width: 125px;
     height: 125px;
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
     background-color: #fff;
-    /* tranistion */
+    transition: 0.1s ease;
+    user-select: none;
 }
 
 #tools {
