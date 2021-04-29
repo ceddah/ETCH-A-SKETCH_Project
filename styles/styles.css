@@ -80,6 +80,8 @@ h1 {
     letter-spacing: 1px;
     cursor: pointer;
     position: relative;
+    font-family: 'Indie Flower', cursive;
+    font-size: 16px;
 }
 
 #tools button.tool {
@@ -91,6 +93,16 @@ h1 {
 
 #tools button.tool:hover {
     box-shadow: none;
+}
+
+#tools #pickRandomColor {
+    transition: 0.1s ease;
+}
+
+#tools #pickRandomColor.active {
+    background-color: #f6f6f6;;
+    color: #252627;
+    font-weight: bold;
 }
 
 .size-btn {
