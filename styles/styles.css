@@ -41,19 +41,14 @@ h1 {
 #drawPad > div {
     width: 125px;
     height: 125px;
-    /* border: 1px solid #ccc; */
     background-color: #fff;
     transition: 0.1s ease;
     user-select: none;
 }
 
 #tools {
-    /* position: absolute;
-    left: 17%;
-    top: 53.7%; */
     height: 530px;
     padding: 0 30px;
-    /* transform: translateY(-50%); */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -69,7 +64,6 @@ h1 {
 #tools button {
     padding: 8px 15px;
     width: 150px;
-    /* background-color: rgba(255, 255, 255, 0.1); */
     background: transparent;
     border: #f6f6f6 1px solid;
     outline: none;
@@ -129,8 +123,6 @@ h1 {
 #tools input[type="color"] {
     background-color: #1B1212;
     border: none;
-    /* height: 35px;
-    width: 80px; */
     height: 50px;
     width: 50px;
     border-radius: 100%;
